@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <!--javascript 라이브러리 : react
+    1. 클라이언트 렌더링, 서버사이드 렌더링 지원
+
+    렌더링 : 그린다. 화면을 구성한다.
+
+    JSX : 리엑트에서 요소(element)를 제공합니다.
+    -->
+</head>
+<body>
+    <div id='root'></div>
+</body>
+<script src="">
+    function formatInfo(student){
+        return student.name + "["+student.id+"]";
+    }
+    //함수 형태로 작성하면 render가 생략된 형태임 
+
+    const student = {
+        id : "20153157",
+        name : "DonbinNa",
+        color : 'blue',
+    }
+    //JSX : HTML과 Javascript가 공존할 수 있는 것
+    const element = (
+    <h3 class={student.color}>
+        {formatInfo(student)}
+    </h3>
+    )
+
+    ReactDOM.render(element, 
+    document.getElementById('root'));
+</script>
+</html>
