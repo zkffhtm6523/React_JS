@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='root'></div>
+    <script>
+    //리엑트를 이용하면 매우 계층적으로 화면을 이용할 수 있음
+    function User(props){
+        return(
+        <div>
+            <img src={props.user.imageUrl}/>
+            &nbsp;
+            <strong>{props.user.name}</strong>
+        </div>
+        );
+    }
+
+    function Board(props){
+        return(
+                //props.user는 Board의 매개변수 props를 말해주고 user에 넣어준다
+                //User를 상속받겠다는 의미임
+            <section>
+                <User user={props.user}/>
+                {props.title}
+                <hr/>
+                {props.content}
+            </section>
+        );
+    }
+        
+    const board = {
+            title : '게시글 제목입니다,',
+            content : '게시글 내용입니다. 반갑습니다',
+            user : {
+                name : '나동빈',
+                imageUrl : 'https://placeimg.com/32/32/any',
+            }
+        }      
+    ReactDOM.render(<Board title={board.title} content={board.content}
+            user={board.user}/>, document.getElementById('root'));
+    </script>
+</body>
+</html>

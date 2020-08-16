@@ -27,13 +27,17 @@
         color : 'blue',
     }
     //JSX : HTML과 Javascript가 공존할 수 있는 것
+    //{}중괄호 h3 태그 안에 중괄호를 사용하면 javascript 코드를 사용해서
+    //함수를 호출하겠다는 의미
     const element = (
     <h3 class={student.color}>
         {formatInfo(student)}
     </h3>
     )
-
-    ReactDOM.render(element, 
-    document.getElementById('root'));
+    //render라는 메소드가 생략되어 있다
+    //무엇을 렌더링하고 싶을 때 
+    //render(호출 함수, 집어넣을 id를 받아오는 수식)
+    //카멜케이스를 사용하므로써 기존 객체언어와 유사함
+    ReactDOM.render(element, document.getElementById('root'));
 </script>
 </html>
