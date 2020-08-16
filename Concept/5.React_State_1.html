@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5장 클래스형 컴포넌트</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    class Clock extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                date: new Date()
+            };
+        }
+        goBack(){
+            //현재 시간 객체를 가져옴
+            let nextDate = this.state.date;
+            nextDate.setSeconds(nextDate.getSeconds() - 10);
+            this.setState({
+                date : nextDate
+            });
+        }
+        render(){
+            return(
+            <div>
+                <h3>현재 시각은 [{this.state.date.toLocaleTimeString()}]입니다</h3>
+                <button onClick={this.goBack.bind(this)}>10초 뒤로가기</button>
+            </div>
+            );  
+        }
+    }
+    /*
+    1. clock class를 실행
+    2. clock이 실행되며 생성자 호출->부모 생성자 호출 및 this.state에 new Date 대입
+    3. render() 실행됨
+    4. 버튼을 누르면 goback이 실행됨
+    */
+    ReactDOM.render(<Clock/>, document.getElementById('root'));
+
+ 
+</script>
+</html>

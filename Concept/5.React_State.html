@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--
+        State of React
+        state는 고정적인 데이터가 아닌 변경될 수 있는 데이터를 처리할 때 사용
+        state값을 변경해서 화면(view)이 변경되면 render() 함수가 다시 실행되어
+        화면에 적용해줌
+
+        state를 사용하기 위해서는 4장까지의 함수형 컴포넌트가 아닌 클래스형 컴포넌트를
+        사용해야함.
+        props : 내부 객체의 값 변경 여지가 없을 때
+        state : 내부 객체의 값 변경 여지가 있을 때 (매우 중요) 
+
+    -->
+</head>
+<body>
+    <script>
+        //2번 방법 : 2번 문제 -> 함수형 컴포넌트
+        function Clock(props){
+            return(
+            <h3>현재 시각은 [{props.date.toLocaleTimeString()}]입니다</h3>
+            );
+        }
+        function tick(){
+            ReactDOM.render(<Clock date={new Date()}/>, 
+            document.getElementById('root'));
+        }
+        setInterval(tick, 1000);
+
+        //3번 방법 : 클래스형 컴포넌트 변경
+        class Clock extends React.Component{
+            //생성자 안 만들어주면 기본 생성자임..
+            //1번 생성자 실행
+            constructor(props){
+                //부모 생성자 호출
+                super(props);
+                //이 클래스의 state에 new Date()를 넣어줌.
+                //state는 동적 변화를 감지해서 재실행함
+                //state의 객체.. date를 넣어줌
+                this.state = {
+                    date: new Date()
+                };
+            }
+            tick(){
+                //값을 변경할 때 무조건 setState함수 사용
+                //getter,setter처럼 state가 사전 정의가 되어 있나봄
+                this.setState({
+                date: new Date( )
+                })
+            }
+            //1초마다 실행
+            componentDidMount(){
+                this.timerID = setInterval(() => this.tick(), 1000);
+            }
+            //자원 반환
+            componentWillUnmount(){
+                clearInterval(this.timerID);
+            }
+            //화면에 그려넣음
+            render(){
+                return(
+                //state전에 props는 매개변수로 선언 안해줘도 기본 내장되어 있음
+                    <h3>현재 시각은 [{this.state.date.toLocaleTimeString()}]입니다</h3>
+                );  
+            }
+        }
+        ReactDOM.render(<Clock/>, document.getElementById('root'));
+    </script>
+</body>
+</html>
